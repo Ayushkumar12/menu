@@ -1,0 +1,77 @@
+main{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    
+}
+.home{
+    margin-top: 10px;
+    
+}
+.home h1{
+    font-size: 3rem;
+    margin: 10px;
+    width: fit-content;
+    text-decoration: underline;
+}
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 10px;
+    padding: 0;
+    /* height: fit-content;
+    overflow: scroll; */
+}
+aside{
+    width: 40%;
+}
+aside h2{
+    font-size: 2rem;
+    margin: 20px 0px;
+}
+.food{
+    width: 250px;
+    background-color: rgb(206, 230, 252);
+    margin: 10px;
+    /* border: 1px solid rgb(39, 39, 39); */
+    border-radius: 20px;
+    padding: 15px;
+}
+.food button{
+    background-color: rgb(76, 76, 240);
+    border-radius: 20px;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+
+}
+.cart{
+    list-style-type: none;
+    margin: 10px;
+    padding: 0;
+}
+.cart li{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+.cart li button{
+    height: fit-content;
+    width: fit-content;
+}
+
+@media only screen and (max-width: 600px) {
+    main{
+        flex-direction: column;
+    }
+    .food{
+        width: 100%;
+    }
+}
