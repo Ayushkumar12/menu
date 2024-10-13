@@ -9,10 +9,10 @@ main{
     
 }
 .home h1{
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 10px;
     width: fit-content;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 .menu{
     display: flex;
@@ -25,10 +25,23 @@ main{
 }
 aside{
     width: 40%;
+    max-width: 300px;
 }
 aside h2{
     font-size: 2rem;
     margin: 20px 0px;
+}
+form h3{
+    margin-bottom: 5px;
+}
+form input{
+    background-color: aqua;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px 15px;
+    margin-left: 20px;
 }
 .food{
     width: 250px;
@@ -66,7 +79,22 @@ aside h2{
     height: fit-content;
     width: fit-content;
 }
-
+.total{
+    font-weight: bolder;
+    font-size: 1.3rem;
+}
+.sub{
+    background-color: rgb(76, 76, 240);
+    border-radius: 20px;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    max-width: 250px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
 @media only screen and (max-width: 600px) {
     main{
         flex-direction: column;

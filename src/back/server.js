@@ -33,9 +33,22 @@ app.get('/menu', (req, res) => {
     res.status(500).send({ message: 'Error retrieving menu' });
   });
 });
-
+app.post('/menu', (req, res) => {
+    if (!req.body.dish_Name || !req.body.dish_Price || !req.body.dish_Id) {
+      console.log('Invalid dish data');
+      res.status(400).send({ message: 'Invalid dish data' });
+    } else {
+      push(dbRef.child('menu'), req.body).then(() => {
+        console.log('dish submitted successfully');
+        res.send({ message: 'dish submitted successfully' });
+      }).catch((error) => {
+        console.error('Error submitting dish:', error);
+        res.status(500).send({ message: 'Error submitting dish' });
+      });
+    }
+  });
 app.post('/orders', (req, res) => {
-  if (!req.body.customerName || !req.body.customerEmail || !req.body.menuItems) {
+  if (!req.body.customerName || !req.body.Table || !req.body.menuItems) {
     console.log('Invalid order data');
     res.status(400).send({ message: 'Invalid order data' });
   } else {
