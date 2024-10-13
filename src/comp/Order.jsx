@@ -19,6 +19,7 @@ const database = getDatabase(app);
 
 export default function Order() {
     const [orders, setorders] = useState([]);
+    const [items, setitems] = useState([]);
 
     useEffect(() => {
       const orderRef = ref(database, "orders");
@@ -33,19 +34,28 @@ export default function Order() {
     }, []);
   return (
     <section className="home">
-        <h1>Menu</h1>
-        <ul className="menu">
-          {orders.map((order) => (
-            <li key={order.id} className="food">
-              <h3>{order.name}</h3>
-              <p>Price: ${order.price}</p>
-              <p>{order.description}</p>
-              <button >
-                Done
-              </button>
+  <h1>Menu</h1>
+  <ul className="menu">
+    {orders.map((order, index) => (
+      <li key={index} className="food">
+        <h3>{order.Table}</h3>
+        <h3>{order.customerName}</h3>
+        <ul>
+          {order.menuItems?.cartItems?.map((item, index) => (
+            <li key={order.dish_Id}>
+              <p>
+                {order.dish_Name} x {item.quantity} = ${item.price}
+              </p>
             </li>
           ))}
         </ul>
-      </section>
+        <p>Total: ${order.totalCost}</p>
+        <button>
+          Done
+        </button>
+      </li>
+    ))}
+  </ul>
+</section>
   );
 }
