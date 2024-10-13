@@ -22,22 +22,24 @@ export default function Admin() {
     const [dish_Price, setdish_Price] = useState("");
     const [menuItems, setMenuItems] = useState([]);
 
-  useEffect(() => {
-    const menuRef = ref(database, "menu");
-    onValue(menuRef, (data) => {
-      if (data.exists()) {
-        setMenuItems(data.val());
-      } else {
-        console.log("No menu items found");
-      }
-    });
-  }, []);
+    useEffect(() => {
+      const menuRef = ref(database, "menu");
+      onValue(menuRef, (data) => {
+        if (data.exists()) {
+          const menuItemsArray = Object.values(data.val()); // Convert object to array
+          setMenuItems(menuItemsArray);
+        } else {
+          console.log("No menu items found");
+        }
+      });
+    }, []);
   const handleSubmitMenu = async () => {
     try {
       const menuRef = ref(database, "menu");
       push(menuRef, {
         dish_Name,
         dish_Price,
+        dish_Id
       })
         .then(() => {
           console.log("Menu submitted successfully");
@@ -63,10 +65,10 @@ export default function Admin() {
       <section className="home">
         <h1>Menu</h1>
         <ul className="menu">
-          {menuItems.map((menuItem) => (
-            <li key={menuItem.id} className="food">
-              <h3>{menuItem.name}</h3>
-              <p>Price: ${menuItem.price}</p>
+        {menuItems.map((menuItem) => (
+            <li key={menuItem.dish_Id} className="food">
+              <h3>{menuItem.dish_Name}</h3>
+              <p>Price: ${menuItem.dish_Price}</p>
               <button >
                 Remove
               </button>

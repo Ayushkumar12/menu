@@ -28,7 +28,8 @@ function Home() {
     const menuRef = ref(database, "menu");
     onValue(menuRef, (data) => {
       if (data.exists()) {
-        setMenuItems(data.val());
+        const menuItemsArray = Object.values(data.val()); // Convert object to array
+        setMenuItems(menuItemsArray);
       } else {
         console.log("No menu items found");
       }
@@ -41,11 +42,11 @@ function Home() {
 
   const handleAddToCart = (menuItem) => {
     const existingCartItem = cartItems.find(
-      (cartItem) => cartItem.id === menuItem.id
+      (cartItem) => cartItem.dish_Id === menuItem.dish_Id
     );
     if (existingCartItem) {
       const updatedCartItems = cartItems.map((cartItem) => {
-        if (cartItem.id === menuItem.id) {
+        if (cartItem.dish_Id === menuItem.dish_Id) {
           return { ...cartItem, quantity: cartItem.quantity + 1 };
         } else {
           return cartItem;
@@ -66,7 +67,7 @@ function Home() {
 
   const calculateTotalCost = () => {
     const totalCost = cartItems.reduce(
-      (acc, cartItem) => acc + cartItem.price * cartItem.quantity,
+      (acc, cartItem) => acc + cartItem.dish_Price * cartItem.quantity,
       0
     );
     setTotalCost(totalCost.toFixed(2));
@@ -101,9 +102,9 @@ function Home() {
         <h1>Menu</h1>
         <ul className="menu">
           {menuItems.map((menuItem) => (
-            <li key={menuItem.id} className="food">
-              <h3>{menuItem.name}</h3>
-              <p>Price: ${menuItem.price}</p>
+            <li key={menuItem.dish_Id} className="food">
+              <h3>{menuItem.dish_Name}</h3>
+              <p>Price: ${menuItem.dish_Price}</p>
               <button onClick={() => handleAddToCart(menuItem)}>
                 Add to Cart
               </button>
@@ -137,8 +138,8 @@ function Home() {
           {cartItems.map((cartItem) => (
             <li key={cartItem.id}>
               <div>
-                <h3>{cartItem.name}</h3>
-                <p>Price: ${cartItem.price}</p>
+                <h3>{cartItem.dish_Name}</h3>
+                <p>Price: ${cartItem.dish_Price}</p>
                 <p>Quantity: {cartItem.quantity}</p>
               </div>
               <button onClick={() => handleRemoveFromCart(cartItem)}>
