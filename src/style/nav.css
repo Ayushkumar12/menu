@@ -2,10 +2,10 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background-color: rgb(76, 76, 240);
-    border-radius: 0px 0px 10px 10px;
-    filter: drop-shadow(10px 5px 5px rgb(76, 76, 240));
+    position: fixed;
+    width: 100dvw;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.089);
 }
 nav img{
     width: 60px;
@@ -13,9 +13,7 @@ nav img{
 }
 .log{
     padding: 10px;
-    background-color: aquamarine;
     border: none;
-    border-radius: 20%;
     color:rgb(0, 0, 0);
     font-weight: bold;
     cursor: pointer;

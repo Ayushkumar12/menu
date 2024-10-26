@@ -98,6 +98,9 @@ function Home() {
 
   return (
     <main>
+      <section className="first">
+        <input type="text" />
+      </section>
       <section className="home">
         <h1>Menu</h1>
         <ul className="menu">
@@ -111,47 +114,48 @@ function Home() {
             </li>
           ))}
         </ul>
-      </section>
-      <aside>
-        <form>
-          <h3>
-            Customer Name:
-          </h3>
-          <input
-            type="text"
-            value={customerName}
-            placeholder="Customer Name"
-            onChange={(e) => setCustomerName(e.target.value)}
-          />
-          <h3>
-            Table:
-          </h3>
-          <input
-            type="text"
-            value={Table}
-            placeholder="T4675"
-            onChange={(e) => setTable(e.target.value)}
-          />
-        </form>
-        <h2>Cart</h2>
-        <ul className="cart">
-          {cartItems.map((cartItem) => (
-            <li key={cartItem.id}>
-              <div>
-                <h3>{cartItem.dish_Name}</h3>
-                <p>Price: ${cartItem.dish_Price}</p>
-                <p>Quantity: {cartItem.quantity}</p>
-              </div>
-              <button onClick={() => handleRemoveFromCart(cartItem)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-        <p className="total">Total: ${totalCost}</p>
+          <aside>
+          <form>
+            <h3>
+              Customer Name:
+            </h3>
+            <input
+              type="text"
+              value={customerName}
+              placeholder="Customer Name"
+              onChange={(e) => setCustomerName(e.target.value)}
+            />
+            <h3>
+              Table:
+            </h3>
+            <input
+              type="text"
+              value={Table}
+              placeholder="T4675"
+              onChange={(e) => setTable(e.target.value)}
+            />
+          </form>
+          <h2>Cart</h2>
+          <ul className="cart">
+            {cartItems.map((cartItem) => (
+              <li key={cartItem.id}>
+                <div>
+                  <h3>{cartItem.dish_Name}</h3>
+                  <p>Price: ${cartItem.dish_Price}</p>
+                  <p>Quantity: {cartItem.quantity}</p>
+                </div>
+                <button onClick={() => handleRemoveFromCart(cartItem)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p className="total">Total: ${totalCost}</p>
 
-        <button className="sub" onClick={handleSubmitOrder}>Submit Order</button>
-      </aside>
+          <button className="sub" onClick={handleSubmitOrder}>Submit Order</button>
+        </aside>
+      </section>
+      
     </main>
   );
 }
