@@ -3,6 +3,7 @@ import Home from './comp/Home';
 import Admin from './comp/Admin';
 import Order from './comp/Order';
 import Navbar from './comp/Navbar';
+import Footer from './comp/Footer';
 import './App.css';
 import { BrowserRouter, Routes ,Route} from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/order' element={<Order />}/>
         </Routes>
       </BrowserRouter>
+      <Footer />
     </section>
   );
 }

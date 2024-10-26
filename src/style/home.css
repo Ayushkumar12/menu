@@ -1,12 +1,34 @@
 
 main{
     background-image: url("../asserts/back.avif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100dvh;
 }
 .first{
-    height: 70dvh;
+    height: 80dvh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: white;
+}
+.herotext{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 20px;
+}
+.first h1{
+    font-size: 3.5rem;
+    margin: 10px;
+}
+.first p{
+    font-size: 2rem;
+    margin: 10px;
+
 }
 .first input{
     height: 50px;
@@ -18,20 +40,23 @@ main{
     background-color: aliceblue;
     border-radius: 20px;
 }
-.home h1{
+.collection{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.collection h2{
     font-size: 2.5rem;
-    margin: 10px;
     width: fit-content;
-    /* text-decoration: underline; */
 }
 .menu{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     list-style-type: none;
     margin: 10px;
     padding: 0;
-    /* height: fit-content;
-    overflow: scroll; */
 }
 aside{
     width: 40%;

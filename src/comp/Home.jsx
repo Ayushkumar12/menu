@@ -99,22 +99,30 @@ function Home() {
   return (
     <main>
       <section className="first">
+        <div className="herotext">
+          <h1>Welcome to Our Restaurant</h1>
+          <p>
+            Discover the best food & drinks
+          </p>
+        </div>
         <input type="text" />
       </section>
       <section className="home">
-        <h1>Menu</h1>
-        <ul className="menu">
-          {menuItems.map((menuItem) => (
-            <li key={menuItem.dish_Id} className="food">
-              <h3>{menuItem.dish_Name}</h3>
-              <p>Price: ${menuItem.dish_Price}</p>
-              <button onClick={() => handleAddToCart(menuItem)}>
-                Add to Cart
-              </button>
-            </li>
-          ))}
-        </ul>
-          <aside>
+        <div className="collection">
+          <h2>Collections</h2>
+          <ul className="menu">
+            {menuItems.map((menuItem) => (
+              <li key={menuItem.dish_Id} className="food">
+                <h3>{menuItem.dish_Name}</h3>
+                <p>Price: ${menuItem.dish_Price}</p>
+                {/* <button onClick={() => handleAddToCart(menuItem)}>
+                  Add to Cart
+                </button> */}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* <aside>
           <form>
             <h3>
               Customer Name:
@@ -153,7 +161,7 @@ function Home() {
           <p className="total">Total: ${totalCost}</p>
 
           <button className="sub" onClick={handleSubmitOrder}>Submit Order</button>
-        </aside>
+        </aside> */}
       </section>
       
     </main>
