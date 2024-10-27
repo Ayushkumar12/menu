@@ -7,8 +7,11 @@ export default function Navbar() {
   return (
     <nav>
       {/* <img src={logo}/> */}
+      <h2>Delightio</h2>
       <ul className='side'>
-        <a className='log'>login</a>
+        <a className='log'>Menu</a>
+        <a className='log'>logIn</a>
+        <a className='log'>signUp</a>
       </ul>
     </nav>
   )

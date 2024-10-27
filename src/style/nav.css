@@ -3,9 +3,11 @@ nav{
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    width: 100dvw;
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.089);
     backdrop-filter: blur( 2px );
+    color:white;
+    padding: 0px 10px 0px 10px;
 }
 nav img{
     width: 60px;
@@ -14,7 +16,6 @@ nav img{
 .log{
     padding: 10px;
     border: none;
-    color:white;
     font-weight: bold;
     cursor: pointer;
 }
