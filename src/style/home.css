@@ -1,9 +1,9 @@
 
 main{
     background-image: url("../asserts/back.avif");
-    background-size: cover;
+    background-size: auto;
     background-repeat: no-repeat;
-    height: 100dvh;
+    height: fit-content;
 }
 .first{
     height: 80dvh;
@@ -36,17 +36,21 @@ main{
     border-radius: 50px;
     font-size: 1.5rem;
     margin-left: 5px;
+    border: none;
 }
 .home{
     margin-top: 10px;
     background-color: aliceblue;
     border-radius: 20px;
+    display: flex;
+
 }
 .collection{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    width: 70dvw;
 }
 .collection h2{
     font-size: 2.5rem;
@@ -61,12 +65,12 @@ main{
     padding: 0;
 }
 aside{
-    width: 40%;
-    max-width: 300px;
+    width: 25dvw;
+    height: auto;
 }
 aside h2{
-    font-size: 2rem;
-    margin: 20px 0px;
+    font-size: 2.5rem;
+    margin: 33.2px;
 }
 form h3{
     margin-bottom: 5px;
@@ -100,43 +104,150 @@ form input{
     cursor: pointer;
 
 }
-.cart{
-    list-style-type: none;
-    margin: 10px;
-    padding: 0;
-}
-.cart li{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-around;
-}
-.cart li button{
-    height: fit-content;
-    width: fit-content;
-}
-.total{
-    font-weight: bolder;
-    font-size: 1.3rem;
-}
+
 .sub{
-    background-color: rgb(76, 76, 240);
     border-radius: 20px;
-    color: white;
     border: none;
     padding: 10px;
-    width: 100%;
-    max-width: 250px;
+    width: 50%;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
+    margin: 10px;
+    border: 2px solid;
 }
-@media only screen and (max-width: 600px) {
-    main{
+.sub:nth-child(2){
+    background-color: rgb(76, 76, 240);
+    color: white;
+}
+.sub:hover{
+    color: white;
+    background-color: rgb(100, 100, 255);
+    transition: background-color 0.5s ease-in-out;
+}
+.obut{
+    display: flex;
+    flex-direction: row;
+
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin: 10px;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #8d8d8d;
+    text-align: left;
+    padding: 8px;
+    width: 100%;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .feedback{
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.5rem;
+  }
+  .feedback form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+   .feedback form input{
+    margin: 10px;
+    }
+   .feedback form button{
+    margin: 10px;
+  }
+  .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.form h2{
+    font-size: 2.5rem;
+    text-decoration: underline;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: fit-content;
+}
+.input2{
+    
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    height: 30px;
+    background-color: aqua;
+    margin: 10px;
+    font-size: 16px;
+}
+.input{
+    
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    height: 30px;
+    background-color: aqua;
+    margin: 10px;
+    font-size: 16px;
+}
+.message{
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    height: 20dvh;
+    background-color: aqua;
+    margin: 10px;
+    font-size: 16px;
+    resize: none;
+}
+.form-group button{
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(88, 64, 224);
+    color: white;
+    cursor: pointer;
+}
+@media only screen and (max-width: 1024px) {
+    .input2{
+        width: -webkit-fill-available
+    }
+}
+@media only screen and (max-width: 768px) {
+    
+    .home{
         flex-direction: column;
     }
-    .food{
+    .collection{
         width: 100%;
+    }
+    aside{
+        width: 100%;
+    }
+    table{
+        width: 90%;
+    }
+    .first h1{
+        font-size: 2rem;
+    }
+    .first p{
+        font-size: 1.5rem;
+    }
+    .first input{
+        display: none;
     }
 }

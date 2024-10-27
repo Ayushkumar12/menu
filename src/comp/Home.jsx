@@ -74,25 +74,36 @@ function Home() {
   };
 
   const handleSubmitOrder = async () => {
-    try {
-      const ordersRef = ref(database, "orders");
-      push(ordersRef, {
-        customerName,
-        Table,
-        restaurantId: "12345",
-        menuItems: cartItems,
-        totalCost,
-      })
-        .then(() => {
-          console.log("Order submitted successfully");
-          setCartItems([]);
-          setTotalCost(0);
+    if (!customerName ||!Table) {
+      alert("Please enter customer name and table number");
+      return;
+    }
+    if (cartItems.length === 0) {
+      alert("No items in the cart");
+      return;
+    }
+    else{
+
+      try {
+        const ordersRef = ref(database, "orders");
+        push(ordersRef, {
+          customerName,
+          Table,
+          restaurantId: "12345",
+          menuItems: cartItems,
+          totalCost,
         })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
+          .then(() => {
+            console.log("Order submitted successfully");
+            setCartItems([]);
+            setTotalCost(0);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -100,12 +111,11 @@ function Home() {
     <main>
       <section className="first">
         <div className="herotext">
-          <h1>Welcome to Our Restaurant</h1>
+          <h1>Delightio</h1>
           <p>
             Discover the best food & drinks
           </p>
         </div>
-        <input type="text" />
       </section>
       <section className="home">
         <div className="collection">
@@ -115,14 +125,16 @@ function Home() {
               <li key={menuItem.dish_Id} className="food">
                 <h3>{menuItem.dish_Name}</h3>
                 <p>Price: ${menuItem.dish_Price}</p>
-                {/* <button onClick={() => handleAddToCart(menuItem)}>
+                <button onClick={() => handleAddToCart(menuItem)}>
                   Add to Cart
-                </button> */}
+                </button>
               </li>
             ))}
           </ul>
         </div>
-        {/* <aside>
+        <aside>
+        <h2>Cart</h2>
+
           <form>
             <h3>
               Customer Name:
@@ -130,9 +142,11 @@ function Home() {
             <input
               type="text"
               value={customerName}
+              required
               placeholder="Customer Name"
               onChange={(e) => setCustomerName(e.target.value)}
             />
+
             <h3>
               Table:
             </h3>
@@ -140,30 +154,50 @@ function Home() {
               type="text"
               value={Table}
               placeholder="T4675"
+              required
               onChange={(e) => setTable(e.target.value)}
             />
           </form>
-          <h2>Cart</h2>
-          <ul className="cart">
+          <table className="cart">
+            <tr>
+              <th>Dish</th>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>
             {cartItems.map((cartItem) => (
-              <li key={cartItem.id}>
-                <div>
-                  <h3>{cartItem.dish_Name}</h3>
-                  <p>Price: ${cartItem.dish_Price}</p>
-                  <p>Quantity: {cartItem.quantity}</p>
-                </div>
-                <button onClick={() => handleRemoveFromCart(cartItem)}>
-                  Remove
-                </button>
-              </li>
+                <tr key={cartItem.id}>
+                  <td>{cartItem.dish_Name}</td>
+                  <td>${cartItem.dish_Price}</td>
+                  <td>{cartItem.quantity}</td>
+                </tr>
             ))}
-          </ul>
-          <p className="total">Total: ${totalCost}</p>
+            
+            <tr>
+              <td colSpan="2">Total:</td>
+              <td>${totalCost}</td>
+            </tr>
+          </table>
+          <div className="obut">
+            <button className="sub" onClick={() => handleRemoveFromCart(cartItems)}>
+              Reset
+            </button>
+            <button className="sub" onClick={handleSubmitOrder}>Place Order</button>
+          </div>
+        </aside>
 
-          <button className="sub" onClick={handleSubmitOrder}>Submit Order</button>
-        </aside> */}
       </section>
-      
+      <section className='form'>
+        <h2>Contact Us</h2>
+        <form className='form-group'>
+          <div className='in'>
+            <input type='text' placeholder='Enter your firstname' name='fname' className='input2' />
+            <input type='text' placeholder='Enter your lastname' name='lname' className='input2'/>
+          </div>
+          <input type='email' placeholder='Enter your email' name='email' className='input'/>
+          <textarea name='message' placeholder='Enter your message' className='message'/>
+          <button type='submit' value='Submit' >Submit</button>
+        </form>
+        </section>
     </main>
   );
 }

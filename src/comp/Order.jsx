@@ -41,10 +41,10 @@ export default function Order() {
         <h3>{order.Table}</h3>
         <h3>{order.customerName}</h3>
         <ul>
-          {order.menuItems?.cartItems?.map((item, index) => (
+          {order.menuItems.map((order, index) => (
             <li key={order.dish_Id}>
               <p>
-                {order.dish_Name} x {item.quantity} = ${item.price}
+                {order.dish_Name}   {order.quantity}
               </p>
             </li>
           ))}
