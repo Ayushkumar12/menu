@@ -94,7 +94,7 @@ function Home() {
           totalCost,
         })
           .then(() => {
-            console.log("Order submitted successfully");
+            alert("Order submitted successfully");
             setCartItems([]);
             setTotalCost(0);
           })
