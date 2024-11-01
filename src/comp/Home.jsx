@@ -28,7 +28,7 @@ function Home() {
     const menuRef = ref(database, "menu");
     onValue(menuRef, (data) => {
       if (data.exists()) {
-        const menuItemsArray = Object.values(data.val()); // Convert object to array
+        const menuItemsArray = Object.values(data.val()); 
         setMenuItems(menuItemsArray);
       } else {
         console.log("No menu items found");
