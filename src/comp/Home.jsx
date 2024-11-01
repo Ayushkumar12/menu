@@ -74,16 +74,14 @@ function Home() {
   };
 
   const handleSubmitOrder = async () => {
-    if (!customerName ||!Table) {
+    if (!customerName || !Table) {
       alert("Please enter customer name and table number");
       return;
     }
     if (cartItems.length === 0) {
       alert("No items in the cart");
       return;
-    }
-    else{
-
+    } else {
       try {
         const ordersRef = ref(database, "orders");
         push(ordersRef, {
@@ -112,9 +110,7 @@ function Home() {
       <section className="first">
         <div className="herotext">
           <h1>Delightio</h1>
-          <p>
-            Discover the best food & drinks
-          </p>
+          <p>Discover the best food & drinks</p>
         </div>
       </section>
       <section className="home">
@@ -123,6 +119,11 @@ function Home() {
           <ul className="menu">
             {menuItems.map((menuItem) => (
               <li key={menuItem.dish_Id} className="food">
+                <img
+                  className="menuimg"
+                  src={menuItem.imageUrl}
+                  alt={menuItem.dish_Name}
+                />
                 <h3>{menuItem.dish_Name}</h3>
                 <p>Price: ${menuItem.dish_Price}</p>
                 <button onClick={() => handleAddToCart(menuItem)}>
@@ -133,12 +134,10 @@ function Home() {
           </ul>
         </div>
         <aside>
-        <h2>Cart</h2>
+          <h2>Cart</h2>
 
           <form>
-            <h3>
-              Customer Name:
-            </h3>
+            <h3>Customer Name:</h3>
             <input
               type="text"
               value={customerName}
@@ -147,9 +146,7 @@ function Home() {
               onChange={(e) => setCustomerName(e.target.value)}
             />
 
-            <h3>
-              Table:
-            </h3>
+            <h3>Table:</h3>
             <input
               type="text"
               value={Table}
@@ -165,39 +162,64 @@ function Home() {
               <th>Quantity</th>
             </tr>
             {cartItems.map((cartItem) => (
-                <tr key={cartItem.id}>
-                  <td>{cartItem.dish_Name}</td>
-                  <td>${cartItem.dish_Price}</td>
-                  <td>{cartItem.quantity}</td>
-                </tr>
+              <tr key={cartItem.id}>
+                <td>{cartItem.dish_Name}</td>
+                <td>${cartItem.dish_Price}</td>
+                <td>{cartItem.quantity}</td>
+              </tr>
             ))}
-            
+
             <tr>
               <td colSpan="2">Total:</td>
               <td>${totalCost}</td>
             </tr>
           </table>
           <div className="obut">
-            <button className="sub" onClick={() => handleRemoveFromCart(cartItems)}>
+            <button
+              className="sub"
+              onClick={() => handleRemoveFromCart(cartItems)}
+            >
               Reset
             </button>
-            <button className="sub" onClick={handleSubmitOrder}>Place Order</button>
+            <button className="sub" onClick={handleSubmitOrder}>
+              Place Order
+            </button>
           </div>
         </aside>
-
       </section>
-      <section className='form'>
+      <section className="form">
         <h2>Contact Us</h2>
-        <form className='form-group'>
-          <div className='in'>
-            <input type='text' placeholder='Enter your firstname' name='fname' className='input2' />
-            <input type='text' placeholder='Enter your lastname' name='lname' className='input2'/>
+        <form className="form-group">
+          <div className="in">
+            <input
+              type="text"
+              placeholder="Enter your firstname"
+              name="fname"
+              className="input2"
+            />
+            <input
+              type="text"
+              placeholder="Enter your lastname"
+              name="lname"
+              className="input2"
+            />
           </div>
-          <input type='email' placeholder='Enter your email' name='email' className='input'/>
-          <textarea name='message' placeholder='Enter your message' className='message'/>
-          <button type='submit' value='Submit' >Submit</button>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            name="email"
+            className="input"
+          />
+          <textarea
+            name="message"
+            placeholder="Enter your message"
+            className="message"
+          />
+          <button type="submit" value="Submit">
+            Submit
+          </button>
         </form>
-        </section>
+      </section>
     </main>
   );
 }
