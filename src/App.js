@@ -5,6 +5,8 @@ import Order from './comp/Order';
 import Navbar from './comp/Navbar';
 import Footer from './comp/Footer';
 import { BrowserRouter, Routes ,Route} from 'react-router-dom';
+import Signup from './comp/Signup';
+import Login from './comp/Login';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/admin' element={<Admin />}/>
+          <Route path='/signup' element={<Signup />}/>
+          <Route path='/login' element={<Login />}/>
           <Route path='/order' element={<Order />}/>
         </Routes>
         <Footer />
