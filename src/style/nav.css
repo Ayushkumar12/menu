@@ -2,7 +2,7 @@ nav{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    position: fixed;
+    position: absolute;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.089);
     backdrop-filter: blur( 2px );
@@ -18,4 +18,5 @@ nav img{
     border: none;
     font-weight: bold;
     cursor: pointer;
+    
 }

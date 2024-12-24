@@ -156,23 +156,28 @@ function Home() {
             />
           </form>
           <table className="cart">
-            <tr>
-              <th>Dish</th>
-              <th>Price</th>
-              <th>Quantity</th>
-            </tr>
+            <thead>
+              <tr>
+                <th>Dish</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
             {cartItems.map((cartItem) => (
-              <tr key={cartItem.id}>
+              <tr key={cartItem.id + cartItem.dish_Name}>
                 <td>{cartItem.dish_Name}</td>
                 <td>${cartItem.dish_Price}</td>
                 <td>{cartItem.quantity}</td>
               </tr>
             ))}
-
-            <tr>
-              <td colSpan="2">Total:</td>
-              <td>${totalCost}</td>
-            </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan="2">Total:</td>
+                <td>${totalCost}</td>
+              </tr>
+            </tfoot>
           </table>
           <div className="obut">
             <button

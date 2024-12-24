@@ -87,7 +87,7 @@ export default function Admin() {
   };
 
   return (
-    <section>
+    <section className="start">
       <div className="greet">
         <h2>Hello Admin, Welcome back</h2>
       </div>

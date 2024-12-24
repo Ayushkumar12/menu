@@ -41,13 +41,15 @@ main {
   background-color: aliceblue;
   border-radius: 20px;
   display: flex;
+  color: black;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 .collection {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 70dvw;
 }
 .collection h2 {
   font-size: 2.5rem;
@@ -62,8 +64,11 @@ main {
   padding: 0;
 }
 aside {
-  width: 25dvw;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 aside h2 {
   font-size: 2.5rem;
@@ -129,7 +134,7 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   margin: 10px;
-  width: 100%;
+  width: 50%;
 }
 
 td,
