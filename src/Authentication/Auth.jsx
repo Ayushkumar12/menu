@@ -33,17 +33,16 @@ const Auth = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await signInWithEmailAndPassword(auth, email, password);
             setEmail("");
             setPassword("");
             setError("");
-            signIn(email, password)
+            await signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 sessionStorage.setItem("Auth Token", user.refreshToken);
             })
             .catch((error) => {
-                console.error("Error signingin:", error);
+                console.error("Error signing in:", error);
             });
             alert("Login successful!");
             navigate('/admin');
@@ -67,15 +66,13 @@ const Auth = () => {
             } else {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-                setEmail("");
-                setPassword("");
-                alert("Signup successful!");
                 const userRef = ref(database, `Users/${user.uid}`);
-                
                 await set(userRef, {
                     displayName,
                     email,
                 });
+                setEmail("");
+                setPassword("");
                 alert("User registered successfully");
                 navigate('/admin'); // Navigate to the admin page after successful signup
             }

@@ -104,7 +104,7 @@ export default function Admin() {
         <Navbar/>
         <div className="top">
           <div className="greet">
-            <h2>Hello {userData.displayName}, Welcome back</h2>
+            <h2>Hello {username}, Welcome back</h2>
           </div>
           <form className="add" onSubmit={handleSubmitMenu}>
             <label>
