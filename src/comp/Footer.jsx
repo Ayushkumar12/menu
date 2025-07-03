@@ -8,11 +8,6 @@ export default function Footer() {
   return (
     <footer>
       <h4>Delightio</h4>
-      <div className="footlinks">
-        <Link to="/">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/about">About</Link>
-      </div>
       <div className="sociolinks">
         <a href=""><img src={face} alt="" /></a>
         <a href=""><img src={insta} alt="" /></a>
