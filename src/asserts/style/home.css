@@ -74,6 +74,7 @@ main {
   margin: 25px;
   border-radius: 50px;
   color: white;
+  cursor: pointer;
 }
 .cart-head h1{
   padding: 10px;
@@ -105,6 +106,29 @@ aside h2 {
   font-family:Georgia, 'Times New Roman', Times, serif;
   color: white;
   background-color: rgb(70, 70, 248);
+}
+
+.click-effect {
+  animation: bounce 0.5s forwards;
+}
+@keyframes clickPulse {
+  0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 rgba(0, 113, 227, 0.4);
+  }
+  50% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 10px rgba(0, 113, 227, 0);
+  }
+  100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 113, 227, 0);
+  }
+}
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 .cont{
   padding: 15px;

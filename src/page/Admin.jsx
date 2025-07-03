@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  } from "react";
 import Footer from "../comp/Footer";
 import Navbar from "../comp/Navbar";
 import { initializeApp } from "firebase/app";
@@ -30,24 +30,11 @@ const storage = getStorage(app);
 
 export default function Admin() {
   const [dish_Name, setDish_Name] = useState("");
-  const [dish_Id, setDish_Id] = useState("");
   const [dish_Price, setDish_Price] = useState("");
-  const [menuItems, setMenuItems] = useState([]);
+  const [menu, setmenu] = useState([]);
   const [image, setImage] = useState(null);
-  const { currentUser , username } = useAuth();
+  const { userData } = useAuth();
 
-
-  useEffect(() => {
-    const menuRef = ref(database, "menu");
-    onValue(menuRef, (data) => {
-      if (data.exists()) {
-        const menuItemsArray = Object.values(data.val());
-        setMenuItems(menuItemsArray);
-      } else {
-        console.log("No menu items found");
-      }
-    });
-  }, []);
 
   const generateUniqueId = () => {
     return `dish_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
@@ -85,18 +72,31 @@ export default function Admin() {
     }
   };
 
-  const handleRemoveMenuItem = async (dish_Id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to remove this dish?"
-    );
-    if (!confirmDelete) {
-      return;
-    } else {
-      const itemRef = ref(database, `menu/${dish_Id}`);
-      await remove(itemRef);
-      alert("Dish removed successfully!");
+  const handleRemoveMenuItem = async (dish_Id) => { 
+    try {
+      const menuRef = ref(database, `menus/${dish_Id}`);
+      await remove(menuRef);
+      console.log(`menu ${dish_Id} deleted successfully`);
+      alert(`menu ${dish_Id} deleted successfully`);
+
+    } catch (error) {
+      console.error("Error deleting menu:", error);
+      alert("Error deleting menu:", error);
+
     }
   };
+
+  useEffect(() => {
+    const menuRef = ref(database, "menu");
+    onValue(menuRef, (data) => {
+      if (data.exists()) {
+        const menuItemsArray = Object.values(data.val()); // Convert object to array
+        setmenu(menuItemsArray);
+      } else {
+        console.log("No menu items found");
+      }
+    });
+  }, []);
 
   return (
     <section>
@@ -104,7 +104,7 @@ export default function Admin() {
         <Navbar/>
         <div className="top">
           <div className="greet">
-            <h2>Hello {username}, Welcome back</h2>
+            <h2>Hello {userData.displayName}, Welcome back</h2>
           </div>
           <form className="add" onSubmit={handleSubmitMenu}>
             <label>
@@ -144,16 +144,16 @@ export default function Admin() {
         <section className="home collection">
             <h2>Menu</h2>
             <ul className="menu">
-              {menuItems.map((menuItem) => (
-                <li key={menuItem.dish_Id} className="food">
+              {menu.map((menu,index) => (
+                <li key={index} className="food">
                   <img
                     className="menuimg"
-                    src={menuItem.imageUrl}
-                    alt={menuItem.dish_Name}
+                    src={menu.imageUrl}
+                    alt={menu.dish_Name}
                   />
-                  <h3>{menuItem.dish_Name}</h3>
-                  <p>Price: ${menuItem.dish_Price}</p>
-                  <button onClick={() => handleRemoveMenuItem(menuItem.dish_Id)}>
+                  <h3>{menu.dish_Name}</h3>
+                  <p>Price: ${menu.dish_Price}</p>
+                  <button onClick={() => handleRemoveMenuItem(menu.dish_Id)}>
                     Remove
                   </button>
                 </li>

@@ -1,11 +1,11 @@
 // src/Authentication/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { getDatabase } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, get } from 'firebase/database';
 
 
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBnnUtNzcnw0UYR8ikFJptHkuzZFkvp4k4",
   authDomain: "online-food-order-80833.firebaseapp.com",
@@ -17,52 +17,51 @@ const firebaseConfig = {
   measurementId: "G-FF4PLG3S2T",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getDatabase(app);
+const db = getDatabase(app); // Initialize Firestore
 
-const Authpro = createContext();
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [User, setUser] = useState(null);
+  const [currentUser , setCurrentUser ] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser (user);
-      console.log("Current User:", user);
       if (user) {
         try {
-            const userDoc = doc(db, "Users", user.uid);
-            const userSnapshot = await getDoc(userDoc);
-            if (userSnapshot.exists()) {
-              const userData = userSnapshot.data();
-              setUser (userData);
-              setUsername(userData.username); // Extract username and store it
-            } else {
-              setError("No such user!");
-            }
-          } catch (err) {
-            setError("Error fetching user: " + err.message);
-          } finally {
-            setLoading(false);
+          const userDoc = ref(db, `Users/${user.uid}`);
+          const userSnapshot = await get(userDoc);
+          if (userSnapshot.exists()) {
+            const data = userSnapshot.val();
+            setUserData(data);
+            
+            console.log("User  Data:", data); // Log the user data
+          } else {
+            setError("No such user!");
           }
-        } else {
-          setLoading(false);
+        } catch (err) {
+          setError(err.message);
         }
-      });
-      return unsubscribe;
-    }, []);
-  
+      } else {
+        setUserData(null);
+      }
+      setLoading(false);
+    });
+  }, []);
 
   return (
-    <Authpro.Provider value={{ currentUser, username }}>{children}</Authpro.Provider>
+    <AuthContext.Provider value={{ currentUser , userData, loading, error }}>
+      {loading ? <div>Loading...</div> : children}
+    </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => {
-  return useContext(Authpro);
+  return useContext(AuthContext);
 };

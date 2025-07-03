@@ -23,6 +23,8 @@ function Home() {
   const [customerName, setCustomerName] = useState("");
   const [Table, setTable] = useState("");
   const [show, setShow] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const [clickEffect, setClickEffect] = useState(false);
   
   
   const Handleclick = () => {
@@ -46,6 +48,9 @@ function Home() {
   }, [cartItems]);
 
   const handleAddToCart = (menuItem) => {
+    setClickEffect(true);
+    setCartCount(prev => prev + 1);
+    setTimeout(() => setClickEffect(false), 300);
     const existingCartItem = cartItems.find(
       (cartItem) => cartItem.dish_Id === menuItem.dish_Id
     );
@@ -146,7 +151,7 @@ function Home() {
               )}
             </ul>
           </div>
-          <div className="cart-head"
+          <div className={`cart-head ${clickEffect ? 'click-effect' : ''}`}
             onClick={Handleclick}>
               <h1>Order Now</h1>
           </div>

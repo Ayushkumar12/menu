@@ -37,6 +37,14 @@ const Auth = () => {
             setEmail("");
             setPassword("");
             setError("");
+            signIn(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                sessionStorage.setItem("Auth Token", user.refreshToken);
+            })
+            .catch((error) => {
+                console.error("Error signing in:", error);
+            });
             alert("Login successful!");
             navigate('/admin');
         } catch (error) {
@@ -52,7 +60,6 @@ const Auth = () => {
         e.preventDefault();
         setLoading(true);
         setError("");
-
         try {
             if (!displayName || !email) {
                 alert("Please enter name and email");
@@ -64,16 +71,12 @@ const Auth = () => {
                 setPassword("");
                 alert("Signup successful!");
                 const userRef = ref(database, `Users/${user.uid}`);
-                user.updateProfile({
-                    displayName: displayName 
-                })
+                
                 await set(userRef, {
-                    user,
                     displayName,
                     email,
                 });
                 alert("User registered successfully");
-                
                 navigate('/admin'); // Navigate to the admin page after successful signup
             }
         } catch (error) {
