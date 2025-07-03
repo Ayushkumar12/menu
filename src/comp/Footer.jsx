@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../style/footer.css";
-import face from "../icon/facebook.png"
-import insta from "../icon/instagram.png"
+import "../asserts/style/footer.css";
+import face from "../asserts/icon/facebook.png"
+import insta from "../asserts/icon/instagram.png"
 
 export default function Footer() {
   return (

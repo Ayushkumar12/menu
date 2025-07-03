@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "caniuse-lite": "^1.0.30001726",
     "express": "^4.21.1",
     "firebase": "^10.14.1",
     "firebase-admin": "^12.7.0",

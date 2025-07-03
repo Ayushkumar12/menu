@@ -1,27 +1,27 @@
 import React from 'react';
-import Home from './comp/Home';
-import Admin from './comp/Admin';
-import Order from './comp/Order';
+import Home from './page/Home';
+import Admin from './page/Admin';
+import Order from './page/Order';
 import Navbar from './comp/Navbar';
 import Footer from './comp/Footer';
 import { BrowserRouter, Routes ,Route} from 'react-router-dom';
-import Signup from './comp/Signup';
-import Login from './comp/Login';
+import Auth from './Authentication/Auth';
+import { AuthProvider } from './Authentication/Authpro';
+import Protectroute from './Authentication/Protectroute';
 
 function App() {
   return (
     <section className='ba'>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/admin' element={<Admin />}/>
-          <Route path='/signup' element={<Signup />}/>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/order' element={<Order />}/>
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Home />}/>
+              <Route path='/admin'  element={<Protectroute> <Admin /> </Protectroute> }/>
+              <Route path='/order' element={<Order />}/>
+              <Route path='/auth' element={<Auth />}/>
+            </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </section>
   );
 }

@@ -62,6 +62,21 @@ app.post('/orders', (req, res) => {
   }
 });
 
+app.post('/Users', (req, res) => {
+  if (!req.body.UserName || !req.body.Email) {
+    console.log('Invalid data');
+    res.status(400).send({ message: 'Invalid data' });
+  } else {
+    push(dbRef.child('Users'), req.body).then(() => {
+      console.log('User registered successfully');
+      res.send({ message: 'User registered successfully' });
+    }).catch((error) => {
+      console.error('Error registering User:', error);
+      res.status(500).send({ message: 'Error registering User' });
+    });
+  }
+});
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
