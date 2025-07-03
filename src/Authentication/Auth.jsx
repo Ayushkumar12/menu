@@ -43,7 +43,7 @@ const Auth = () => {
                 sessionStorage.setItem("Auth Token", user.refreshToken);
             })
             .catch((error) => {
-                console.error("Error signing in:", error);
+                console.error("Error signingin:", error);
             });
             alert("Login successful!");
             navigate('/admin');
