@@ -75,6 +75,7 @@ export default function Admin() {
   const handleRemoveMenuItem = async (dish_Id) => { 
     try {
       const menuRef = ref(database, `menus/${dish_Id}`);
+      setmenu(prev => prev.filter(item => item.dish_Id !== dish_Id));
       await remove(menuRef);
       console.log(`menu ${dish_Id} deleted successfully`);
       alert(`menu ${dish_Id} deleted successfully`);
