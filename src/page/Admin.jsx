@@ -33,7 +33,7 @@ export default function Admin() {
   const [dish_Price, setDish_Price] = useState("");
   const [menu, setmenu] = useState([]);
   const [image, setImage] = useState(null);
-  const { userData } = useAuth();
+  const { username } = useAuth();
 
 
   const generateUniqueId = () => {
@@ -104,7 +104,7 @@ export default function Admin() {
         <Navbar/>
         <div className="top">
           <div className="greet">
-            <h2>Hello {username}, Welcome back</h2>
+            <h2>Hello  {username}, Welcome back</h2>
           </div>
           <form className="add" onSubmit={handleSubmitMenu}>
             <label>

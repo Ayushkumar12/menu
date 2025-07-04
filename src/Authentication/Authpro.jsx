@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
           if (userSnapshot.exists()) {
             const data = userSnapshot.val();
             setUserData(data);
-            setusername(data.displayName)
+            setUsername(data.displayName)
             
             console.log("User  Data:", data); // Log the user data
           } else {
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser , username, loading, error }}>
+    <AuthContext.Provider value={{ currentUser , userData, username, loading, error }}>
       {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );
