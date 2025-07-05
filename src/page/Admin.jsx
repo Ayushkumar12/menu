@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../comp/Footer";
 import Navbar from "../comp/Navbar";
 import { initializeApp } from "firebase/app";
@@ -9,7 +9,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
-import { useAuth } from '../Authentication/Authpro';
+import { useAuth } from "../Authentication/Authpro";
 import "../asserts/style/admin.css";
 
 const firebaseConfig = {
@@ -23,7 +23,6 @@ const firebaseConfig = {
   measurementId: "G-FF4PLG3S2T",
 };
 
-
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
@@ -34,7 +33,6 @@ export default function Admin() {
   const [menu, setmenu] = useState([]);
   const [image, setImage] = useState(null);
   const { username } = useAuth();
-
 
   const generateUniqueId = () => {
     return `dish_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
@@ -72,18 +70,15 @@ export default function Admin() {
     }
   };
 
-  const handleRemoveMenuItem = async (dish_Id) => { 
+  const handleRemoveMenuItem = async (firebaseKey) => {
     try {
-      const menuRef = ref(database, `menus/${dish_Id}`);
-      setmenu(prev => prev.filter(item => item.dish_Id !== dish_Id));
+      const menuRef = ref(database, `menu/${firebaseKey}`);
       await remove(menuRef);
-      console.log(`menu ${dish_Id} deleted successfully`);
-      alert(`menu ${dish_Id} deleted successfully`);
-
+      console.log(`Menu item ${firebaseKey} deleted successfully`);
+      alert(`Menu item deleted successfully`);
     } catch (error) {
       console.error("Error deleting menu:", error);
       alert("Error deleting menu:", error);
-
     }
   };
 
@@ -91,9 +86,14 @@ export default function Admin() {
     const menuRef = ref(database, "menu");
     onValue(menuRef, (data) => {
       if (data.exists()) {
-        const menuItemsArray = Object.values(data.val()); // Convert object to array
+        const menuItemsArray = Object.entries(data.val()).map(
+          ([key, value]) => ({
+            key,...value,
+          })
+        );
         setmenu(menuItemsArray);
       } else {
+        setmenu([]);
         console.log("No menu items found");
       }
     });
@@ -102,10 +102,10 @@ export default function Admin() {
   return (
     <section>
       <section className="start">
-        <Navbar/>
+        <Navbar />
         <div className="top">
           <div className="greet">
-            <h2>Hello  {username}, Welcome back</h2>
+            <h2>Hello {username}, Welcome back</h2>
           </div>
           <form className="add" onSubmit={handleSubmitMenu}>
             <label>
@@ -140,29 +140,29 @@ export default function Admin() {
               Add dish
             </button>
           </form>
-
         </div>
+
         <section className="home collection">
-            <h2>Menu</h2>
-            <ul className="menu">
-              {menu.map((menu,index) => (
-                <li key={index} className="food">
-                  <img
-                    className="menuimg"
-                    src={menu.imageUrl}
-                    alt={menu.dish_Name}
-                  />
-                  <h3>{menu.dish_Name}</h3>
-                  <p>Price: ${menu.dish_Price}</p>
-                  <button onClick={() => handleRemoveMenuItem(menu.dish_Id)}>
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
+          <h2>Menu</h2>
+          <ul className="menu">
+            {menu.map((menuItem, index) => (
+              <li key={menuItem.key} className="food">
+                <img
+                  className="menuimg"
+                  src={menuItem.imageUrl}
+                  alt={menuItem.dish_Name}
+                />
+                <h3>{menuItem.dish_Name}</h3>
+                <p>Price: ${menuItem.dish_Price}</p>
+                <button onClick={() => handleRemoveMenuItem(menuItem.key)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
         </section>
       </section>
-      <Footer/>
+      <Footer />
     </section>
   );
 }

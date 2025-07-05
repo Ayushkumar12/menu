@@ -41,7 +41,7 @@ export default function Order() {
     const orderRef = ref(database, "orders");
     onValue(orderRef, (data) => {
       if (data.exists()) {
-        const orderItemsArray = Object.values(data.val()); // Convert object to array
+        const orderItemsArray = Object.values(data.val()); 
         setorders(orderItemsArray);
       } else {
         console.log("No menu items found");
