@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getAuth } from 'firebase/auth'; // Import the Firebase Auth module
-import { initializeApp } from 'firebase/app'; // Import the Firebase App module
-import "../asserts/style/nav.css"; // Corrected the path to assets
+import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app'; 
+import "../asserts/style/nav.css"; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyBnnUtNzcnw0UYR8ikFJptHkuzZFkvp4k4",
@@ -35,7 +35,7 @@ export default function Navbar() {
       <ul className='side'>
         <Link to='/admin' className='log'>Admin</Link> 
         <Link to='/order' className='log'>Order</Link>
-        <a onClick={logout} className='log' style={{ cursor: 'pointer' }}>Logout</a>
+        <a href='' onClick={logout} className='log' style={{ cursor: 'pointer' }}>Logout</a>
       </ul>
     </nav>
   );
